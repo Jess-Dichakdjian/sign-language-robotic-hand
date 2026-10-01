@@ -1,3 +1,12 @@
+"""
+Reconstructed from the Raspberry Pi wrist-control implementation
+documented in my 2024 bachelor thesis.
+
+The original source file was not recovered. This version reproduces
+the documented GPIO/PWM control structure for the two servo motors
+used to actuate the cable-driven continuum wrist.
+"""
+
 import RPi.GPIO as GPIO
 from time import sleep
 
