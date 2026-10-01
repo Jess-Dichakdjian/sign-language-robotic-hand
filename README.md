@@ -704,6 +704,12 @@ sign-language-robotic-hand/
 │       ├── adams_wrist_simulation.mp4
 │       └── continuum_wrist.gif
 │
+├── src/
+|   ├── wrist_control/
+|   │   └── continuum_wrist_control.py
+|   ├── vision/
+|   │   └── gesture_to_sign_mapping.py
+|   └── README.md
 └── docs/
 ```
 
