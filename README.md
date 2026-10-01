@@ -2,310 +2,331 @@
 
 **Bachelor Thesis — Mechanical Engineering, Robotics & Mechatronics**
 
-A physical robotic-hand prototype developed for sign-language education, combining a commercially available robotic hand with a **custom cable-driven continuum wrist**, mechanical redesign, multibody simulation, 3D printing and Raspberry Pi-based actuation.
+A physical robotic-hand prototype for sign-language education, developed by extending a commercial **Hiwonder uHandPi** platform with a custom **cable-driven continuum wrist**, mechanical modelling, multibody simulation, 3D printing, Raspberry Pi control and a preliminary vision-based sign-selection interface.
 
-> **Project status:** Completed bachelor thesis prototype.  
-> The physical hand and continuum wrist were built and tested; AI-based learner sign recognition and automatic feedback remained future work.
+> **Status:** Completed bachelor thesis prototype  
+> **Academic year:** 2023–2024  
+> **Institution:** National Polytechnic University of Armenia
 
----
-
-## Project Overview
-
-The goal of this project was to investigate how a low-cost physical robotic hand could be adapted as an interactive tool for sign-language education.
-
-Rather than designing an entire dexterous hand from scratch, I used the **Hiwonder uHandPi** robotic hand as the starting platform and focused my engineering work on a major mechanical limitation of the original design: its wrist and lower manipulator.
-
-I redesigned this section as a **cable-driven compliant / continuum wrist**, giving the hand a larger and more natural bending range while maintaining a relatively simple and low-cost mechanical structure.
-
-The project covered the full physical prototyping workflow:
-
-**concept → CAD → kinematic modelling → multibody simulation → material selection → 3D printing → assembly → servo control → physical testing**
+![Final physical prototype](media/prototype/final_prototype.jpg)
 
 ---
 
-## What I Built
+## At a Glance
 
-The final prototype combines:
-
-- the existing uHandPi robotic hand and finger mechanism
-- a custom four-section continuum wrist
-- flexible backbone elements
-- tendon / cable actuation
-- two servo motors for the new wrist mechanism
-- Raspberry Pi-based control
-- custom 3D-printed PLA and TPU components
-- a physical enclosure for electronics and actuation components
-
-The prototype was physically manufactured and assembled rather than remaining only a CAD or simulation project.
+| | |
+|---|---|
+| **Problem** | The original robotic-hand platform had limited wrist mobility for reproducing expressive sign-language poses |
+| **My main contribution** | Mechanical redesign and physical implementation of a cable-driven continuum wrist |
+| **Hardware** | Hiwonder uHandPi, Raspberry Pi 4, servo motors, 3D-printed wrist |
+| **Mechanical tools** | SolidWorks, MSC Adams, Ultimaker Cura |
+| **Programming** | Python, Raspberry Pi GPIO/PWM, adapted vision-demo code |
+| **Manufacturing** | PLA, TPU, tendon/fishing-line actuation, physical assembly |
+| **Result** | Working physical prototype with actuated continuum wrist and basic sign-generation / vision proof-of-concept |
+| **Not completed** | General sign-language recognition, automatic learner feedback and closed-loop continuum control |
 
 ---
 
-## My Contributions
+# Project Overview
 
-This was my **individual bachelor thesis project**.
+The goal of this bachelor thesis was to investigate how a low-cost physical robotic hand could be adapted into an interactive platform for **sign-language education**.
 
-My engineering work included:
+Rather than designing an entire dexterous hand from scratch, I used the commercially available **Hiwonder uHandPi** robotic hand as a starting platform.
 
-### Mechanical Design
+The original hand already provided independently actuated fingers, Raspberry Pi electronics, camera hardware and open-source control software.
 
-- redesigning the lower section of the uHandPi platform
-- removing the original lower manipulator / wrist mechanism
-- designing a new cable-driven continuum wrist
-- designing four rounded wrist sections
-- designing the flexible backbone arrangement
-- designing cable routing for actuation
-- designing the base / electronics enclosure
-- creating and refining the assembly in SolidWorks
-- checking mechanical clearances before manufacturing
+My main engineering focus was the mechanical limitation of the original lower manipulator and wrist.
 
-### Modelling & Analysis
+I replaced this section with a **custom cable-driven compliant / continuum wrist**, designed to provide a wider and more natural bending range while maintaining a relatively simple, inexpensive and manufacturable structure.
 
-- modelling the finger kinematics using Denavit-Hartenberg concepts
-- studying forward and inverse kinematics
-- modelling the continuum wrist using cable-driven continuum-manipulator concepts
-- studying differential kinematics
-- deriving the relationship between cable actuation and continuum configuration
-- studying Jacobian-based relationships between configuration and end-effector motion
-- investigating the dynamic behaviour of the mechanism
-- creating an MSC Adams multibody simulation
-- analysing simulated motion and mechanical response
+The complete project covered:
 
-### Prototyping
-
-- preparing components for additive manufacturing
-- slicing components using Ultimaker Cura
-- printing rigid wrist components in PLA
-- printing the flexible backbone component in TPU
-- physically assembling the redesigned hand
-- installing tendon / fishing-line actuation
-- integrating the servos and Raspberry Pi
-
-### Control
-
-- writing Python code for Raspberry Pi GPIO / PWM control of the new wrist servos
-- commanding pre-defined wrist configurations
-- integrating the new mechanical system with the existing uHandPi hand
-
----
-
-# Starting Platform — Hiwonder uHandPi
-
-The project did **not** create the complete robotic hand from scratch.
-
-The original platform was a commercially available **Hiwonder uHandPi Raspberry Pi robotic hand**.
-
-The existing platform already provided:
-
-- the five-finger hand mechanism
-- finger servos / actuation
-- Raspberry Pi-based electronics
-- open-source Python control software
-- camera hardware
-- OpenCV-based vision functionality provided by the platform
-
-The existing uHandPi finger-control code is **third-party software and is not claimed as my own work**.
-
-My project focused on mechanically redesigning and extending the platform, particularly the wrist and lower manipulator.
+```text
+Problem Definition
+        ↓
+Mechanical Redesign
+        ↓
+SolidWorks CAD
+        ↓
+Kinematic / Dynamic Modelling
+        ↓
+MSC Adams Simulation
+        ↓
+Material Selection
+        ↓
+3D Printing
+        ↓
+Physical Assembly
+        ↓
+Raspberry Pi / Servo Control
+        ↓
+Prototype Testing
+```
 
 ---
 
 # Mechanical Redesign
 
-## Original Limitation
+## Original Platform
 
-The original uHandPi lower manipulator restricted the range and style of wrist motion needed for expressive sign-language gestures.
+The starting point was the **Hiwonder uHandPi Raspberry Pi robotic hand**.
 
-The redesign therefore removed the original lower wrist/manipulator assembly while retaining the hand and associated electronics.
+The original platform included:
+
+- five-finger robotic hand
+- finger servo actuation
+- Raspberry Pi
+- camera
+- existing Python control software
+- computer-vision demonstration software
+
+The hand mechanism itself was retained.
+
+The original lower manipulator and wrist were not well suited to the range of wrist orientations I wanted to investigate for sign-language gestures.
 
 ---
 
-## Cable-Driven Continuum Wrist
+## My Redesign
 
-I replaced the original wrist mechanism with a compliant structure consisting of **four rounded sections connected through a flexible backbone**.
+I removed the original lower manipulator and designed a new continuum-style wrist and support structure.
+
+![Original uHandPi and redesigned system](media/cad/design_comparison.jpg)
+
+The redesigned system introduced:
+
+- four rounded wrist sections
+- a flexible central backbone
+- cable / tendon actuation
+- two servo motors
+- custom support geometry
+- a new base / electronics enclosure
+- integration with the existing uHandPi hand
+
+The intention was to obtain a compliant bending mechanism rather than relying entirely on discrete revolute joints.
+
+---
+
+# Cable-Driven Continuum Wrist
+
+The wrist consists of four serially arranged sections connected through a compliant central structure.
 
 ```text
-Robotic Hand
+uHandPi Hand
      │
      ▼
- Rounded Section
-     │
- Rounded Section
-     │
- Rounded Section
-     │
- Rounded Section
-     │
- Flexible Backbone
+┌───────────┐
+│ Section 1 │
+├───────────┤
+│ Section 2 │
+├───────────┤
+│ Section 3 │
+├───────────┤
+│ Section 4 │
+└───────────┘
      │
      ▼
- Actuation / Base
+Flexible Backbone
+     │
+     ▼
+Tendon Actuation
+     │
+     ▼
+Servo Motors
 ```
 
-Unlike a conventional wrist composed entirely of discrete revolute joints, the new mechanism bends continuously through deformation of the compliant structure.
+Instead of producing motion through a conventional rigid wrist joint, the mechanism bends through deformation of the compliant structure.
 
-This was selected to provide:
+This approach was selected to investigate:
 
-- greater bending flexibility
-- smoother wrist-like motion
+- larger wrist-bending range
+- smoother hand orientation changes
 - reduced mechanical complexity
-- relatively low manufacturing cost
-- compatibility with additive manufacturing
+- low-cost construction
+- additive manufacturing
+- tendon-driven actuation
 
 ---
 
-## Tendon / Cable Actuation
+## Tendon Actuation
 
-The wrist is actuated through cables routed through the continuum structure.
+The physical prototype uses multiple cable / tendon runs routed through the continuum wrist.
 
-The physical prototype contains **eight cable runs**, arranged so that paired cables act together as effective control directions.
+The design used **eight physical cable runs**, grouped into effective actuation directions.
 
-Fishing line was used as an inexpensive tendon material during prototyping.
+Fishing line was used as a low-cost tendon material during prototyping.
 
-The tendon forces bend the compliant wrist structure and change the orientation of the robotic hand.
+Two servo motors actuate the tendon system and produce bending of the wrist.
+
+The project did not implement closed-loop tendon-tension control; the prototype was controlled using predefined servo commands.
 
 ---
 
 # CAD Design
 
-The modified system was modelled in **SolidWorks** before physical manufacturing.
+The complete modified system was modelled and assembled in **SolidWorks**.
 
-The CAD work included:
+My CAD work included the redesigned:
 
-- original hand representation
-- four custom continuum-wrist sections
-- flexible backbone geometry
-- cable-routing features
-- electronics / actuation enclosure
-- full assembly integration
+- continuum wrist sections
+- flexible-backbone arrangement
+- cable-routing geometry
+- connection between the wrist and existing hand
+- base / electronics enclosure
+- complete modified assembly
 
-Virtual assembly was used to check:
+CAD assembly analysis was used to inspect clearances and identify potential mechanical conflicts before manufacturing.
 
-- mechanical interference
-- clearances
-- component positioning
-- manufacturability
-- assembly feasibility
+## Assembly Overview
 
-This allowed mechanical issues to be identified before committing to long 3D-printing cycles.
+![Final robotic-hand CAD assembly](media/cad/assembly_render.jpg)
 
-> CAD images will be added to `media/cad/`.
+## Technical Drawing
+
+![SolidWorks technical drawing](media/cad/technical_drawing.png)
+
+Native CAD files and neutral geometry exports are available under:
+
+```text
+cad/
+├── solidworks/
+└── exports/
+```
+
+The neutral CAD export is provided as a **Parasolid `.x_t`** file.
 
 ---
 
 # Kinematic Modelling
 
+The system contains two mechanically different subsystems:
+
+1. the existing articulated fingers
+2. the new compliant continuum wrist
+
+These require different modelling approaches.
+
+---
+
 ## Finger Kinematics
 
-The retained hand provides independent finger flexion, with one principal bending degree of freedom associated with each finger.
+The uHandPi hand provides five principal finger-flexion variables.
 
-The finger system was analysed using **Denavit-Hartenberg modelling concepts**.
-
-The five finger variables can be represented as:
+They can be represented conceptually as:
 
 ```text
-θ1  Thumb
-θ2  Index
-θ3  Middle
-θ4  Ring
-θ5  Pinky
+θ1 → Thumb
+θ2 → Index
+θ3 → Middle
+θ4 → Ring
+θ5 → Pinky
 ```
 
-Forward kinematics describes the relationship:
+The thesis investigated the finger system using **Denavit-Hartenberg modelling concepts**.
+
+Forward kinematics considers:
 
 ```text
-joint configuration → finger/end-effector pose
+Joint Configuration
+        ↓
+Finger / End-Effector Pose
 ```
 
-while inverse kinematics considers the reverse problem:
+while inverse kinematics considers:
 
 ```text
-desired pose → required joint configuration
+Desired Pose
+        ↓
+Required Joint Configuration
 ```
 
 ---
 
-## Continuum-Wrist Kinematics
+## Continuum-Wrist Modelling
 
-The continuum mechanism requires a different modelling approach from a conventional rigid-link manipulator.
+The new wrist cannot be represented as simply as a conventional rigid-link wrist.
 
-The analysis considered the relationship between:
+The analysis therefore considered the relationship between:
 
 ```text
-Cable / Tendon Space
-        │
-        ▼
+Actuation Space
+(tendon lengths)
+        ↓
 Configuration Space
 (curvature / orientation)
-        │
-        ▼
+        ↓
 Operational Space
-(end-effector pose)
+(hand pose)
 ```
 
-The model investigated how tendon-length changes produce bending of the compliant mechanism and therefore alter the pose of the attached robotic hand.
+The aim was to understand how changes in tendon actuation influence the configuration of the compliant wrist and therefore the position and orientation of the hand.
 
 ---
 
 ## Differential Kinematics
 
-Differential kinematics was studied to relate actuation changes to motion of the hand.
+Differential kinematics was studied to relate actuator changes to motion of the robotic hand.
 
 Conceptually:
 
 ```text
-Cable Velocities
-       │
-       ▼
-Configuration-Space Velocity
-       │
-       ▼
-Jacobian
-       │
-       ▼
+Tendon Velocities
+        ↓
+Configuration Velocity
+        ↓
+Jacobian Relationship
+        ↓
 End-Effector Velocity
 ```
 
-This provides a basis for more advanced continuous control of the wrist in future versions of the system.
+This modelling provides a foundation for more advanced closed-loop continuum control, although such a controller was not implemented in the bachelor-thesis prototype.
 
 ---
 
 # Dynamic Modelling
 
-The project also considered the dynamic behaviour of the mechanism.
+The thesis also investigated the dynamic behaviour of the mechanism.
 
-The modelling examined factors including:
+The modelling considered factors including:
 
-- link / component mass
+- component mass
 - inertia
 - centres of mass
-- gravitational effects
+- gravity
 - elastic behaviour
 - damping
 - friction
 - motor torque
 - compliant-joint behaviour
 
-The purpose was to understand how the physical mechanism responds during movement rather than considering geometry alone.
+This allowed the redesign to be considered as a dynamic mechanical system rather than purely as static CAD geometry.
 
 ---
 
 # MSC Adams Simulation
 
-The redesigned system was imported into **MSC Adams** for multibody simulation.
+The redesigned robotic hand and wrist were simulated using **MSC Adams**.
 
-The simulation was used to investigate the behaviour of the continuum mechanism during motion.
+The multibody model was used to investigate the behaviour of the wrist during motion.
 
-Outputs included quantities such as:
+Simulation outputs included quantities such as:
 
 - hand position
-- angular response
+- angular position
 - angular velocity
 - kinetic energy
-- deformation / displacement behaviour
+- deformation / displacement
 
-These simulations provided an additional check between the mechanical design and expected physical behaviour before and during prototyping.
+## Simulation Demonstration
 
-> Simulation screenshots and plots will be added to `media/simulation/`.
+[Watch the MSC Adams wrist simulation](media/demos/adams_wrist_simulation.mp4)
+
+The recovered MSC Adams project files are stored under:
+
+```text
+simulation/adams/
+```
+
+The simulation was used alongside the CAD design to evaluate the expected mechanical behaviour before and during physical prototyping.
 
 ---
 
@@ -313,307 +334,434 @@ These simulations provided an additional check between the mechanical design and
 
 ## 3D Printing
 
-The redesigned components were prepared using **Ultimaker Cura** and manufactured using a **Creality Ender 3**.
+The custom wrist components were prepared for additive manufacturing using **Ultimaker Cura** and printed using a **Creality Ender 3**.
 
-Two primary materials were used.
+Two materials were used.
 
 ### PLA
 
-PLA was used for the four rigid wrist sections.
+PLA was used for the rigid continuum-wrist sections.
 
-The complete set required more than ten hours of printing.
+The complete set of wrist components required more than ten hours of printing.
 
 ### TPU
 
-TPU was used for the flexible backbone element because its flexibility better suited the compliant wrist design.
+TPU was used for the flexible backbone because its compliance was better suited to the bending mechanism.
 
 The backbone required approximately two hours of printing.
 
 ---
 
-## Physical Assembly
+# Physical Assembly
 
-The final prototype was assembled using:
+The printed components were assembled with:
 
-- four printed wrist sections
-- flexible TPU backbone
-- eleven mechanical fasteners
+- rigid PLA wrist sections
+- TPU flexible component
+- mechanical fasteners
 - fishing-line tendons
 - servo actuation
 - Raspberry Pi electronics
-- retained uHandPi robotic hand
+- the retained uHandPi robotic hand
 
-The resulting assembly produced the physical prototype shown below.
+## Final Prototype
 
-<!-- Add once uploaded:
-![Final robotic-hand prototype](media/prototype/final_prototype.jpg)
--->
+![Completed physical robotic-hand prototype](media/prototype/final_prototype.jpg)
 
----
-
-# Control System
-
-The system contained two distinct control layers.
-
-## Existing uHandPi Hand
-
-The finger mechanism retained the uHandPi's existing open-source Python control infrastructure.
-
-This was accessed using the Raspberry Pi environment and VNC-based tools supplied with the original platform.
-
-This existing software was **not developed by me**.
+The result was a complete physical prototype rather than only a CAD or simulation model.
 
 ---
 
-## Custom Continuum-Wrist Control
+# Wrist Control
 
-My custom control work focused on the newly designed wrist.
+The newly designed wrist was controlled separately from the original uHandPi finger-control software.
 
-A **Raspberry Pi 4 Model B** was used to command two servo motors through GPIO PWM.
+A **Raspberry Pi 4 Model B** generated PWM commands for two servo motors controlling the tendon mechanism.
 
-The control concept was:
+The control architecture was:
 
 ```text
-Python Command
-      │
-      ▼
+Python
+   │
+   ▼
 Raspberry Pi GPIO
-      │
-      ▼
-PWM Signals
-      │
-      ▼
-Servo Motors
-      │
-      ▼
-Tendon Movement
-      │
-      ▼
-Continuum Wrist Bending
+   │
+   ▼
+PWM
+   │
+   ▼
+Two Servo Motors
+   │
+   ▼
+Tendon Displacement
+   │
+   ▼
+Continuum-Wrist Bending
 ```
 
-The thesis prototype used pre-programmed servo commands rather than a complete closed-loop continuum controller.
+The bachelor-thesis implementation used predefined servo positions rather than a closed-loop continuum controller.
+
+The original source file for this small wrist-control program has not yet been recovered, but the implementation is documented in the thesis.
+
+The documented program includes:
+
+- Raspberry Pi GPIO configuration
+- two servo-control outputs
+- 50 Hz PWM
+- conversion from requested servo angle to PWM duty cycle
+- simultaneous command of both servos
+- GPIO cleanup on program termination
+
+If the original source cannot be recovered, a clearly labelled reconstruction may later be added based on the archived thesis implementation.
 
 ---
 
-# Sign-Language Operation
+# Finger Control and Vision Prototype
 
-The implemented prototype could reproduce **basic pre-programmed hand configurations and motions**.
+The finger-control and camera system originated from the existing **uHandPi software platform**.
 
-The intended educational interaction was:
+I did **not** develop the complete uHandPi software stack from scratch.
+
+Instead, I adapted parts of the existing software for the sign-language prototype.
+
+---
+
+## Adapted Gesture Detection
+
+The uHandPi software included an existing **rock-paper-scissors / hand-gesture recognition demonstration**.
+
+I modified this existing logic as a proof of concept for selecting sign-language hand configurations.
+
+For the prototype, existing detected gesture classes were repurposed as commands for sign-language gestures, including:
 
 ```text
-Select Sign
-    │
-    ▼
-Robot Demonstrates Sign
-    │
-    ▼
-Learner Repeats Sign
+Detected Rock
+     ↓
+Trigger Letter A configuration
 ```
 
-A more advanced version was envisioned in which a camera would recognise the learner's gesture and provide feedback.
+and:
 
-That feedback system was **not completed in the bachelor-thesis prototype**.
+```text
+Detected Scissors
+     ↓
+Trigger Letter K configuration
+```
+
+This was a **prototype mapping**, not a general-purpose sign-language recognition system.
+
+The purpose was to demonstrate how an existing vision classifier could trigger predefined robotic-hand configurations.
 
 ---
 
-# Implemented vs Future Functionality
+# Sign-Language Interaction Concept
+
+The implemented prototype combined predefined hand movements with the educational concept:
+
+```text
+Gesture / Sign Selection
+        ↓
+Robot Hand Configuration
+        ↓
+Robot Demonstrates Sign
+        ↓
+Learner Observes / Repeats
+```
+
+The longer-term concept was:
+
+```text
+Learner Performs Sign
+        ↓
+Camera Recognition
+        ↓
+Accuracy Evaluation
+        ↓
+Automatic Feedback
+```
+
+The second pipeline was **not completed** during the bachelor thesis.
+
+---
+
+# Implemented vs Planned
 
 | Component | Status |
 |---|---|
 | Physical robotic-hand prototype | ✅ Implemented |
 | Custom continuum wrist | ✅ Implemented |
-| SolidWorks mechanical design | ✅ Implemented |
-| Multibody simulation | ✅ Implemented |
+| SolidWorks CAD design | ✅ Implemented |
+| Technical drawing | ✅ Implemented |
+| Kinematic modelling | ✅ Studied / developed |
+| Continuum-mechanism modelling | ✅ Studied / developed |
+| MSC Adams simulation | ✅ Implemented |
 | PLA / TPU manufacturing | ✅ Implemented |
-| Physical assembly | ✅ Implemented |
-| Raspberry Pi wrist-servo control | ✅ Implemented |
-| Basic pre-programmed motion/sign reproduction | ✅ Implemented |
-| Existing uHandPi finger control | ✅ Used — third-party baseline |
-| Camera hardware | ✅ Existing uHandPi hardware |
-| Automatic learner sign recognition | ❌ Not completed |
-| Automatic sign-accuracy feedback | ❌ Not completed |
-| Closed-loop continuum control | ❌ Not implemented |
+| Physical wrist assembly | ✅ Implemented |
+| Two-servo tendon actuation | ✅ Implemented |
+| Raspberry Pi wrist-control code | ✅ Implemented |
+| Basic physical wrist movement | ✅ Demonstrated |
+| Existing uHandPi finger software | ✅ Used as baseline |
+| Adapted rock-paper-scissors detector | ✅ Prototype implemented |
+| Gesture → predefined sign mapping | ✅ Proof of concept |
+| General sign-language recognition | ❌ Not implemented |
+| Automatic learner-sign evaluation | ❌ Not implemented |
+| Real-time educational feedback | ❌ Not implemented |
+| Closed-loop wrist control | ❌ Not implemented |
+| Quantitative positioning validation | ❌ Not performed |
 | Formal educational user study | ❌ Not performed |
-| Quantitative sign-recognition accuracy | ❌ Not available |
 
 ---
 
-# Demonstration
+# Demonstrations
 
-## Physical Prototype
+## Physical Continuum-Wrist Test
 
-<!-- Add:
-![Physical robotic-hand prototype](media/prototype/final_prototype.jpg)
--->
+[Watch the physical wrist demonstration](media/demos/physical_wrist_demo.mp4)
 
-## Motion Demonstration
+This video shows the manufactured continuum wrist moving on the physical prototype.
 
-<!-- Add:
-![Robotic-hand demonstration](media/demos/robotic_hand.gif)
--->
-
-A longer physical demonstration is available in:
-
-```text
-media/demos/robotic_hand.mp4
-```
+The wrist mechanism was the main mechanical focus of the bachelor thesis.
 
 ---
 
-# Results
+## MSC Adams Simulation
 
-The project successfully produced a **working physical prototype** of the redesigned robotic hand and continuum wrist.
+[Watch the MSC Adams simulation](media/demos/adams_wrist_simulation.mp4)
 
-The main engineering outcomes were:
-
-- successful mechanical integration with the existing uHandPi hand
-- physical manufacture of the redesigned wrist
-- compliant bending using a cable-driven mechanism
-- Raspberry Pi / servo actuation of the new wrist
-- basic reproduction of pre-programmed motions
-- multibody simulation of the redesigned structure
-- complete CAD-to-hardware prototyping workflow
-
-The project was primarily a **mechanical and mechatronics prototype**, rather than a validated sign-recognition or educational-AI system.
-
-No controlled quantitative user-study results or sign-recognition accuracy measurements are claimed.
+The simulation shows the redesigned wrist mechanism being evaluated in the multibody environment.
 
 ---
 
-# Limitations
+## Optional Inline GIF
 
-The prototype has several important limitations.
+If included in this repository:
 
-### Control
+![Continuum-wrist demonstration](media/demos/continuum_wrist.gif)
 
-The continuum wrist was controlled using pre-programmed servo positions rather than full closed-loop shape or end-effector control.
+---
 
-### Hand Integration
+# Engineering Results
 
-The existing uHandPi finger-control system remained separate from much of the custom wrist-control implementation.
+The project successfully produced a physical mechatronics prototype incorporating a custom compliant wrist into an existing robotic-hand platform.
 
-### Perception
+The principal engineering outcomes were:
 
-The planned camera-based recognition of a learner's sign was not completed.
+- redesign of the original lower manipulator
+- custom cable-driven continuum wrist
+- complete CAD-to-hardware development workflow
+- multibody simulation
+- PLA / TPU manufacturing
+- tendon-based wrist actuation
+- Raspberry Pi servo control
+- physical demonstration of the continuum mechanism
+- integration with the existing uHandPi hand
+- preliminary adaptation of existing vision software for sign-selection commands
 
-### Educational Feedback
+The project demonstrated the **mechanical and mechatronic feasibility** of the redesign.
 
-The prototype could demonstrate gestures but could not automatically evaluate the learner's sign accuracy.
+It did not establish quantitative sign-recognition accuracy or educational effectiveness.
 
-### Mechanical Precision
+---
 
-Cable-driven compliant mechanisms introduce challenges including:
+# Engineering Limitations
 
-- tendon tension
+## Open-Loop Wrist Control
+
+The wrist used predefined servo positions rather than sensing the actual continuum shape or hand pose.
+
+This means effects such as:
+
+- tendon stretch
 - friction
 - backlash
+- hysteresis
 - deformation
-- calibration
-- repeatability
+- servo error
 
-These effects were not fully compensated through feedback control in the prototype.
+were not actively compensated.
+
+---
+
+## Mechanical Repeatability
+
+Continuum and cable-driven mechanisms can be sensitive to cable tension, material deformation and assembly tolerances.
+
+The prototype did not include a systematic quantitative repeatability study.
+
+---
+
+## Software Integration
+
+The custom wrist controller and the existing uHandPi finger-control software were not fully consolidated into a single clean software architecture.
+
+---
+
+## Vision System
+
+The vision work was limited to adapting existing uHandPi gesture-recognition functionality as a proof of concept.
+
+A dedicated sign-language recognition model was not developed.
+
+---
+
+## Educational Feedback
+
+Automatic comparison between the learner's gesture and the desired sign was not implemented.
+
+No formal study with learners was conducted.
 
 ---
 
 # Future Work
 
-Potential next steps include:
+Potential future development includes:
 
 - integrate finger and wrist control into one software architecture
-- develop closed-loop continuum-wrist control
-- add joint / tendon / shape sensing
-- improve tendon tensioning and calibration
-- implement camera-based sign recognition
+- recover or reconstruct the original wrist-control source
+- implement closed-loop continuum control
+- add tendon-tension or shape sensing
+- add hand-pose feedback
+- improve tendon calibration
+- quantitatively evaluate wrist repeatability
+- develop dedicated sign-language recognition
+- extend the sign library
 - provide automatic learner feedback
-- create a structured sign library
-- quantitatively evaluate repeatability and positioning
-- conduct appropriately designed educational user studies
-- redesign the electronics enclosure
-- investigate lighter and more durable compliant materials
+- evaluate the system with educators and learners
+- improve enclosure and electronics integration
+- investigate alternative compliant materials
+- optimise the continuum geometry
+- add safety and emergency-stop functionality
 
 ---
 
 # Technology Stack
 
-### Mechanical / Simulation
+## Mechanical Engineering
 
 - SolidWorks
 - MSC Adams
+- continuum robotics
+- tendon / cable-driven mechanisms
+- compliant mechanisms
+- mechanical prototyping
+- engineering drawings
+
+## Manufacturing
+
 - Ultimaker Cura
-- additive manufacturing
+- Creality Ender 3
 - PLA
 - TPU
-- cable / tendon-driven mechanisms
+- additive manufacturing
 
-### Robotics / Control
+## Embedded / Control
 
 - Raspberry Pi 4
 - Python
-- GPIO
+- RPi.GPIO
 - PWM servo control
-- robotic-hand kinematics
-- continuum robotics
-- multibody dynamics
+- servo motors
 
-### Existing Platform Technologies
+## Computer Vision
 
-- Hiwonder uHandPi
 - OpenCV
-- VNC-based control tools
+- adapted uHandPi gesture-recognition pipeline
 
 ---
 
 # Repository Structure
-
-The repository is being reconstructed from the original bachelor-thesis project files.
 
 ```text
 sign-language-robotic-hand/
 │
 ├── README.md
 │
-├── src/
-│   └── wrist_control/
-│
 ├── cad/
+│   ├── solidworks/
+│   │   ├── Robotic Arm.SLDASM
+│   │   ├── RoboticHand.SLDDRW
+│   │   └── [associated SolidWorks parts]
+│   │
+│   └── exports/
+│       └── robotic_hand_assembly.x_t
 │
 ├── simulation/
+│   └── adams/
+│       ├── Jessica_Robot.bin
+│       └── MODEL_hand.bin
 │
-├── docs/
+├── media/
+│   ├── prototype/
+│   │   └── final_prototype.jpg
+│   │
+│   ├── cad/
+│   │   ├── assembly_render.jpg
+│   │   ├── design_comparison.jpg
+│   │   └── technical_drawing.png
+│   │
+│   └── demos/
+│       ├── physical_wrist_demo.mp4
+│       ├── adams_wrist_simulation.mp4
+│       └── continuum_wrist.gif
 │
-└── media/
-    ├── prototype/
-    ├── cad/
-    ├── simulation/
-    └── demos/
+└── docs/
 ```
 
-Only files whose ownership and purpose can be clearly identified will be included.
+Not every original project file is included.
+
+Large software installations, Python distributions and third-party uHandPi source trees are intentionally excluded.
 
 ---
 
-# Attribution
+# Attribution and Third-Party Work
 
 ## Hiwonder uHandPi
 
-This project uses the **Hiwonder uHandPi** robotic hand as its starting platform.
+This project builds upon the commercially available **Hiwonder uHandPi** robotic-hand platform.
 
-The original:
+The existing platform provided:
 
-- hand mechanism
-- finger actuation
-- Raspberry Pi software
-- camera system
-- OpenCV functionality
-- associated open-source control code
+- robotic hand and finger mechanism
+- finger servos
+- Raspberry Pi electronics
+- camera
+- existing Python control software
+- existing OpenCV / vision demonstrations
 
-were developed by Hiwonder / the upstream uHandPi project and are **not my original work**.
+These components are **not claimed as my original work**.
 
-My bachelor-thesis contribution focused on redesigning and extending the platform with the custom continuum wrist, modelling, simulation, manufacturing and associated wrist-control implementation.
+---
 
-Third-party source code will not be presented as my own work.
+## Vision Software
+
+The recovered `robot.py` originates substantially from the existing uHandPi / Lobot software.
+
+The original source identifies the upstream author as **Aiden** and references the Lobot project.
+
+My work involved modifying and repurposing parts of this existing vision/demo pipeline for the sign-language prototype, including adapting gesture classes to trigger predefined sign-language hand configurations.
+
+The upstream software itself is not claimed as my original implementation.
+
+---
+
+## My Original Thesis Work
+
+My primary original contributions were:
+
+- mechanical redesign of the lower manipulator
+- design of the cable-driven continuum wrist
+- CAD integration of the redesigned mechanism
+- mechanical drawings
+- continuum-robot modelling
+- kinematic and dynamic analysis
+- MSC Adams simulation
+- material selection
+- additive manufacturing
+- physical assembly
+- tendon / servo integration
+- custom Raspberry Pi control of the continuum wrist
+- physical testing of the redesigned mechanism
+- adaptation and integration of existing vision functionality into the project concept
 
 ---
 
@@ -621,38 +769,45 @@ Third-party source code will not be presented as my own work.
 
 For robotics and mechatronics roles, this project demonstrates experience with:
 
-- physical robotic prototyping
-- CAD and mechanical design
-- compliant / continuum mechanisms
+- physical robot prototyping
+- robotic hands and end-effectors
+- continuum robotics
+- compliant mechanisms
 - tendon-driven actuation
-- robotic-hand systems
+- SolidWorks CAD
+- engineering drawings
+- multibody dynamics
+- MSC Adams
 - kinematic modelling
-- dynamics
-- multibody simulation
 - additive manufacturing
 - material selection
-- Raspberry Pi integration
-- servo control
+- Raspberry Pi
 - Python
+- PWM servo control
+- computer-vision integration
 - hardware/software integration
-- iterative mechanical design
+- iterative engineering design
 - human-robot interaction concepts
+- adapting an existing robotic platform rather than treating third-party work as original
 
 ---
 
-## Academic Context
+# Academic Context
 
 **Bachelor Thesis — 2023/2024**
 
-Mechanical Engineering — Robotics & Mechatronics track  
+**Mechanical Engineering — Robotics & Mechatronics Track**  
 National Polytechnic University of Armenia
 
-**Author:** Jessica Dichakdjian
+**Author:** Jessica Dichakdjian  
+**Supervisor:** Prof. Narek Zakaryan
 
 ---
 
-## Project Status
+# Project Status
 
 ✅ **Completed physical bachelor-thesis prototype**
 
-The repository is currently being reconstructed and documented for my robotics engineering portfolio.
+The core mechanical redesign, modelling, simulation, manufacturing and physical wrist actuation were completed.
+
+The broader educational AI / automatic-feedback system remained incomplete and is presented here as future work rather than as a completed capability.
