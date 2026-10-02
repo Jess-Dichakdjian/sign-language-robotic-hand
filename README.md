@@ -1,5 +1,5 @@
 # Sign-Language Educational Robotic Hand
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 **Bachelor Thesis — Mechanical Engineering, Robotics & Mechatronics**
 
 A physical robotic-hand prototype for sign-language education, developed by extending a commercial **Hiwonder uHandPi** platform with a custom **cable-driven continuum wrist**, mechanical modelling, multibody simulation, 3D printing, Raspberry Pi control and a preliminary vision-based sign-selection interface.
